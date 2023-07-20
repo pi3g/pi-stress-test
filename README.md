@@ -9,7 +9,7 @@ For ease of use the test provides a graphical overlay, where you can switch betw
     ```
 2. Install prerequisites
     ```sh
-    pip install python3-pip pysimplegui gpiozero
+    pip install pysimplegui gpiozero
     sudo apt install stress-ng mesa-utils
     ```
 3. Set DISPLAY Env variable (only necessary if connected via SSH)
