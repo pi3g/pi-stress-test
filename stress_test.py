@@ -17,7 +17,10 @@ stress_gpu_process = None
 cpuonly_mode = False
 autorestart = False
 
-curr_temp_limit = subprocess.check_output(["cat /boot/config.txt | grep temp_limit"], shell=True)
+try:
+    curr_temp_limit = subprocess.check_output(["cat /boot/config.txt | grep temp_limit"], shell=True)
+except:
+    curr_temp_limit = b'temp_limit=85\n'
 
 def start_gui():
     layout = [
