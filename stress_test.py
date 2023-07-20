@@ -102,18 +102,16 @@ def cli(gui, cpuonly, autoreboot):
     cpuonly_mode = cpuonly
     autorestart = autoreboot
 
-    start_stressing()
+    
     cpu = CPUTemperature()
 
     if gui:
         try:
             window = start_gui()
         except:
-            print("Error starting GUI")
-            os.killpg(os.getpgid(stress_cpu_process.pid), signal.SIGTERM)
-            os.killpg(os.getpgid(stress_gpu_process.pid), signal.SIGTERM)
+            print("Error starting GUI, Exiting.")
             return
-        
+        start_stressing()
         if cpuonly_mode:
             window["-MODE_BUTTON-"].update("CPU and GPU")
             window["-STATUS_TEXT-"].update("max. load reached (CPU)")
@@ -143,6 +141,7 @@ def cli(gui, cpuonly, autoreboot):
             window["-INFO_TEXT-"].update("{0}°C, {1}MHz".format(cpu.temperature, get_cpu_freq()))
         window.close()
     else:
+        start_stressing()
         try:
             while True:
                 time.sleep(1)
