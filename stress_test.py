@@ -110,7 +110,10 @@ def cli(gui, cpuonly, autoreboot):
             window = start_gui()
         except:
             print("Error starting GUI")
-            pass
+            os.killpg(os.getpgid(stress_cpu_process.pid), signal.SIGTERM)
+            os.killpg(os.getpgid(stress_gpu_process.pid), signal.SIGTERM)
+            return
+        
         if cpuonly_mode:
             window["-MODE_BUTTON-"].update("CPU and GPU")
             window["-STATUS_TEXT-"].update("max. load reached (CPU)")
